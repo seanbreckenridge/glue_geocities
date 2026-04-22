@@ -10,7 +10,15 @@ dist: build
 	cp ./assets/images/* ./dist/assets/images/
 	@echo "Done, check ./dist"
 
-build: $(OUTFILE) ./assets/stars.js
+font: ./dist/assets/vt323.woff
+./dist/assets/vt323.woff: vt323.woff
+	mkdir -p ./dist/assets
+	cp ./vt323.woff ./dist/assets/vt323.woff
+
+vt323.woff:
+	wget https://fonts.gstatic.com/s/vt323/v18/pxiKyp0ihIEF2isfFJU.woff2 -O vt323.woff
+
+build: $(OUTFILE) ./assets/stars.js font
 
 ./assets/stars.js: elm/src/Stars.elm
 	@echo "Compiling Elm..."
